@@ -1,0 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    direction: rtl;
+  }
+}
+
+.gradient-background {
+  background: linear-gradient(135deg, #00a6eb 0%, #005bea 100%);
+}
