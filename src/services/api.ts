@@ -16,25 +16,21 @@ export interface RegisterData {
 
 export const api = {
   login: async (data: LoginData) => {
-    // eslint-disable-next-line no-useless-catch
     try {
-      const response = await axios.post(
-        `${API_BASE_URL}/auth/giris`,
-        data
-      );
+      const response = await axios.post(`${API_BASE_URL}/auth/giris`, data);
       return response.data;
     } catch (error) {
       console.error("Login Error:", error);
-      throw error;
-    }},
+      console.log(error);
+    }
+  },
 
   register: async (data: RegisterData) => {
-    // eslint-disable-next-line no-useless-catch
     try {
       const response = await axios.post(`${API_BASE_URL}/kullanici`, data);
       return response.data;
     } catch (error) {
-      throw error;
+      console.log(error);
     }
   },
 };

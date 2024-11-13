@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { Mail, Lock } from "lucide-react";
 import toast from "react-hot-toast";
-import { api } from "../services/api";
+import { api } from "../../services/api";
+import { useNavigate } from "react-router-dom";
 
 const LoginForm = () => {
   const [loading, setLoading] = useState(false);
@@ -9,6 +10,7 @@ const LoginForm = () => {
     eposta: "",
     sifre: "",
   });
+  const navigate = useNavigate();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData((prev) => ({
@@ -17,22 +19,29 @@ const LoginForm = () => {
     }));
   };
 
+  const handleLogin = () => {
+    navigate("/Home");
+  };
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
 
     try {
+      setLoading(true); // تعيين setLoading إلى true عند بدء الاتصال
       const response = await api.login(formData);
-      if (response.success) {
-        toast.success(response.message);
+      console.log(response);
+      if (response.hata === false) {
+        console.log(response);
+        toast.success("Başarılı Giriş");
+        handleLogin();
       } else {
-        toast.error(response.message);
+        toast.error("Eposta yada Şifre Hatalıdır");
       }
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (error) {
-      toast.error("حدث خطأ غير متوقع");
+      console.log("Login Error:", error);
+      toast.error("An error occurred while logging in. Please try again."); // عرض رسالة توست عند حدوث خطأ
     } finally {
-      setLoading(false);
+      setLoading(false); // إعادة setLoading إلى false بعد انتهاء العملية
     }
   };
 
@@ -47,7 +56,7 @@ const LoginForm = () => {
           name="eposta"
           value={formData.eposta}
           onChange={handleChange}
-          placeholder="البريد الإلكتروني"
+          placeholder="E-Posta"
           className="w-full pl-3 pr-10 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-right"
           required
         />
@@ -62,7 +71,7 @@ const LoginForm = () => {
           name="sifre"
           value={formData.sifre}
           onChange={handleChange}
-          placeholder="كلمة المرور"
+          placeholder="Şifre"
           className="w-full pl-3 pr-10 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-right"
           required
         />
@@ -73,11 +82,11 @@ const LoginForm = () => {
           type="button"
           className="text-blue-600 hover:text-blue-700 font-medium"
         >
-          نسيت كلمة المرور؟
+          Şifremi Unuttum
         </button>
         <label className="flex items-center">
           <input type="checkbox" className="ml-2" />
-          <span className="text-gray-600">تذكرني</span>
+          <span className="text-gray-600">Beni Hatırla</span>
         </label>
       </div>
 
@@ -86,7 +95,7 @@ const LoginForm = () => {
         disabled={loading}
         className="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition duration-200 flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed"
       >
-        {loading ? "جاري تسجيل الدخول..." : "تسجيل الدخول"}
+        {loading ? "Oturum açıyorum..." : "Oturum aç"}
       </button>
     </form>
   );

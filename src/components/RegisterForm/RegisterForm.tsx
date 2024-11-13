@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { User, Mail, Lock } from "lucide-react";
 import toast from "react-hot-toast";
-import { api } from "../services/api";
+import { api } from "../../services/api";
 
 const RegisterForm = () => {
   const [loading, setLoading] = useState(false);
@@ -30,7 +30,7 @@ const RegisterForm = () => {
       eposta: formData.eposta,
       sifre: formData.sifre,
     });
-    toast.success("تم إنشاء الحساب بنجاح");
+    toast.success("Hesap başarıyla oluşturuldu");
     console.log("Registration successful:", response);
   };
 
@@ -45,7 +45,7 @@ const RegisterForm = () => {
           name="ad"
           value={formData.ad}
           onChange={handleChange}
-          placeholder="الاسم الكامل"
+          placeholder="Ad"
           className="w-full pl-3 pr-10 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-right"
           required
         />
@@ -57,9 +57,9 @@ const RegisterForm = () => {
         <input
           type="text"
           name="soyad"
-          value={formData.ad}
+          value={formData.soyad}
           onChange={handleChange}
-          placeholder="الاسم الكامل"
+          placeholder="Soyad"
           className="w-full pl-3 pr-10 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-right"
           required
         />
@@ -74,7 +74,7 @@ const RegisterForm = () => {
           name="eposta"
           value={formData.eposta}
           onChange={handleChange}
-          placeholder="البريد الإلكتروني"
+          placeholder="E-Posta"
           className="w-full pl-3 pr-10 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-right"
           required
         />
@@ -89,7 +89,7 @@ const RegisterForm = () => {
           name="sifre"
           value={formData.sifre}
           onChange={handleChange}
-          placeholder="كلمة المرور"
+          placeholder="Şifre"
           className="w-full pl-3 pr-10 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-right"
           required
         />
@@ -98,7 +98,9 @@ const RegisterForm = () => {
       <div className="flex items-center justify-end text-sm">
         <label className="flex items-center">
           <input type="checkbox" className="ml-2" required />
-          <span className="text-gray-600">أوافق على الشروط والأحكام</span>
+          <span className="text-gray-600">
+            Şartları ve koşulları kabul ediyorum
+          </span>
         </label>
       </div>
 
@@ -107,7 +109,7 @@ const RegisterForm = () => {
         disabled={loading}
         className="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition duration-200 flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed"
       >
-        {loading ? "جاري إنشاء الحساب..." : "إنشاء حساب"}
+        {loading ? "Hesap oluşturuluyor..." : "Bir hesap oluşturun"}
       </button>
     </form>
   );
