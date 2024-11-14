@@ -24,20 +24,36 @@ const RegisterForm = () => {
 
     setLoading(true);
 
-    const response = await api.register({
-      ad: formData.ad,
-      soyad: formData.soyad,
-      eposta: formData.eposta,
-      sifre: formData.sifre,
-    });
-    toast.success("Hesap başarıyla oluşturuldu");
-    console.log("Registration successful:", response);
+    
+
+    try {
+      setLoading(true);
+      const response = await api.register({
+        ad: formData.ad,
+        soyad: formData.soyad,
+        eposta: formData.eposta,
+        sifre: formData.sifre,
+      });
+      console.log(response);
+      if (response.hata === false) {
+        console.log(response);
+        toast.success("Hesap başarıyla oluşturuldu", response);
+      } else {
+        console.log(response.mesaj);
+        toast.error(response.mesaj);
+      }
+    } catch (error) {
+      console.log("Register Error:", error);
+      toast.error("Hesap Oluşturma hatası oluştu lütfen tekrar giriş yapınız");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
     <form action="POST" onSubmit={handleSubmit} className="space-y-4">
       <div className="relative">
-        <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none text-gray-400">
+        <div className="absolute inset-y-0 left-1 flex items-center pl-3 pointer-events-none text-gray-400">
           <User className="w-5 h-5" />
         </div>
         <input
@@ -46,12 +62,12 @@ const RegisterForm = () => {
           value={formData.ad}
           onChange={handleChange}
           placeholder="Ad"
-          className="w-full pl-3 pr-10 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-right"
+          className="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-left"
           required
         />
       </div>
       <div className="relative">
-        <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none text-gray-400">
+        <div className="absolute inset-y-0  left-1 flex items-center pl-3 pointer-events-none text-gray-400">
           <User className="w-5 h-5" />
         </div>
         <input
@@ -60,13 +76,13 @@ const RegisterForm = () => {
           value={formData.soyad}
           onChange={handleChange}
           placeholder="Soyad"
-          className="w-full pl-3 pr-10 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-right"
+          className="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-left"
           required
         />
       </div>
 
       <div className="relative">
-        <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none text-gray-400">
+        <div className="absolute inset-y-0 left-1 flex items-center pl-3 pointer-events-none text-gray-400">
           <Mail className="w-5 h-5" />
         </div>
         <input
@@ -75,13 +91,13 @@ const RegisterForm = () => {
           value={formData.eposta}
           onChange={handleChange}
           placeholder="E-Posta"
-          className="w-full pl-3 pr-10 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-right"
+          className="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-left"
           required
         />
       </div>
 
       <div className="relative">
-        <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none text-gray-400">
+        <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-gray-400">
           <Lock className="w-5 h-5" />
         </div>
         <input
@@ -90,7 +106,7 @@ const RegisterForm = () => {
           value={formData.sifre}
           onChange={handleChange}
           placeholder="Şifre"
-          className="w-full pl-3 pr-10 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-right"
+          className="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-left"
           required
         />
       </div>

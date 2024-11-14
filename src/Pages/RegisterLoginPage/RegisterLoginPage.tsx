@@ -7,7 +7,7 @@ import RegisterForm from "../../components/RegisterForm/RegisterForm";
 const RegisterLoginPage = () => {
   const [isLogin, setIsLogin] = useState(true);
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-500 to-cyan-600 flex items-center justify-center p-4">
+    <div  className="min-h-screen bg-gradient-to-br from-blue-500 to-cyan-600 flex items-center justify-center p-4">
       <Toaster position="top-center" />
       <div className="w-full max-w-4xl grid md:grid-cols-2 bg-white rounded-2xl shadow-2xl overflow-hidden">
         {/* Left Side - Image & Info */}

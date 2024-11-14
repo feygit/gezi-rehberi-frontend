@@ -27,7 +27,7 @@ const LoginForm = () => {
     setLoading(true);
 
     try {
-      setLoading(true); // تعيين setLoading إلى true عند بدء الاتصال
+      setLoading(true);
       const response = await api.login(formData);
       console.log(response);
       if (response.hata === false) {
@@ -39,16 +39,16 @@ const LoginForm = () => {
       }
     } catch (error) {
       console.log("Login Error:", error);
-      toast.error("An error occurred while logging in. Please try again."); // عرض رسالة توست عند حدوث خطأ
+      toast.error("Giriş hatası oluştu lütfen tekrar giriş yapınız");
     } finally {
-      setLoading(false); // إعادة setLoading إلى false بعد انتهاء العملية
+      setLoading(false);
     }
   };
 
   return (
-    <form action="post" onSubmit={handleSubmit} className="space-y-4">
+    <form dir="ltr" action="post" onSubmit={handleSubmit} className="space-y-4">
       <div className="relative">
-        <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none text-gray-400">
+        <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-gray-400">
           <Mail className="w-5 h-5" />
         </div>
         <input
@@ -57,13 +57,13 @@ const LoginForm = () => {
           value={formData.eposta}
           onChange={handleChange}
           placeholder="E-Posta"
-          className="w-full pl-3 pr-10 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-right"
+          className="w-full pr-3 pl-10 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-left"
           required
         />
       </div>
 
       <div className="relative">
-        <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none text-gray-400">
+        <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-gray-400">
           <Lock className="w-5 h-5" />
         </div>
         <input
@@ -72,7 +72,7 @@ const LoginForm = () => {
           value={formData.sifre}
           onChange={handleChange}
           placeholder="Şifre"
-          className="w-full pl-3 pr-10 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-right"
+          className="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-left"
           required
         />
       </div>

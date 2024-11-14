@@ -1,5 +1,6 @@
 import axios from "axios";
 
+
 const API_BASE_URL = "https://turistik-yerler.vercel.app";
 
 export interface LoginData {
@@ -33,4 +34,5 @@ export const api = {
       console.log(error);
     }
   },
+ 
 };
